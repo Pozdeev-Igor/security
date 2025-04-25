@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" logicalFilePath="path-independent"
+                   xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+
+    <changeSet id="25_04_2025_0__init_database" author="i.pozdeev" runAlways="false" runOnChange="false">
+        <comment>Создание таблиц базы данных</comment>
+        <sqlFile path="sql/init/25_04_2025_0__init_database.sql" relativeToChangelogFile="true" splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet id="25_04_2025_1__alter_table_users_set_default_values" author="i.pozdeev" runAlways="false"
+               runOnChange="false">
+        <comment>Добавление дефолтных значений</comment>
+        <sqlFile path="sql/init/25_04_2025_1__alter_table_users_set_default_values.sql" relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+
+    <changeSet id="25_04_2023_2__create_test_users" author="i.pozdeev" runAlways="false" runOnChange="false">
+        <comment>Добавление тестовых пользователей</comment>
+        <sqlFile path="sql/init/25_04_2025_2__create_test_users.sql" relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true"/>
+    </changeSet>
+</databaseChangeLog>
+
+

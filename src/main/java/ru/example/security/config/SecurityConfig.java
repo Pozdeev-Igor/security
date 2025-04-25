@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+import java.util.UUID;
+
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
@@ -31,6 +33,7 @@ private final DataSource dataSource;
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
                         .permitAll())
+                .rememberMe(me -> me.key(UUID.randomUUID().toString()))
                 .logout(config -> config
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")

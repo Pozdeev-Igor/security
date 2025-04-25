@@ -10,16 +10,25 @@
 </div>
 <div th:if="${param.logout}">You have been logged out.</div>
 <form th:action="@{/login}" method="post">
-    <div>
-        <h1>Please sign in</h1>
-        <label for="username">
-            <b>Username</b>
-        </label>
-        <input type="text" placeholder="Enter Username" name="username" id="username" required>
-        <label for="password"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="password" id="password" required>
-        <input type="submit" value="Sign In"/>
-    </div>
+    <h1>Please sign in</h1>
+    <table>
+        <tr>
+            <td><label for="username"><b>Username</b></label></td>
+            <td><input type="text" placeholder="Enter Username" name="username" id="username" required></td>
+        </tr>
+        <tr>
+            <td><label for="password"><b>Password</b></label></td>
+            <td><input type="password" placeholder="Enter Password" name="password" id="password" required></td>
+        </tr>
+        <tr>
+            <td><label for="remember-me"><b>Remember Me</b></label> </td>
+            <td><input type="checkbox" name="remember-me" /></td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td><input type="submit"  value="Sign In" /></td>
+        </tr>
+    </table>
 </form>
 </body>
 </html>

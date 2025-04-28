@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 import java.util.UUID;
 
@@ -32,6 +33,7 @@ private final DataSource dataSource;
                 .formLogin(login -> login.loginPage("/login")
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
+                        .successHandler(authenticationSuccessHandler())
                         .permitAll())
                 .rememberMe(me -> me.key(UUID.randomUUID().toString()))
                 .logout(config -> config
@@ -40,6 +42,11 @@ private final DataSource dataSource;
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"));
         return http.build();
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new AuthenticationHandler();
     }
 
     @Bean

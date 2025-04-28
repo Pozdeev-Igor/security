@@ -14,4 +14,18 @@ public class AuthController {
     public String login() {
         return "login";
     }
+
+    @GetMapping("/consumer")
+    public String consumer() {
+        return "consumer";
+    }
+
+    @GetMapping("/producer")
+    public String producer() {
+        return "producer";
+    }
+    @GetMapping("/admin")
+    public String admin() {
+        return "admin";
+    }
 }

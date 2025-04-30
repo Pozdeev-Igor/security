@@ -31,12 +31,14 @@ private final DataSource dataSource;
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         request -> request.requestMatchers("/login").permitAll()
-                                .anyRequest().authenticated()
+                                .requestMatchers("/error").permitAll()
+                                .requestMatchers("/**").authenticated()
                 )
                 .formLogin(login -> login.loginPage("/login")
                         .defaultSuccessUrl("/")
                         .failureUrl("/login?error=true")
                         .successHandler(authenticationSuccessHandler())
+                        .failureHandler(new CustomAuthenticationFailureHandler())
                         .permitAll())
                 .rememberMe(me -> me.key(UUID.randomUUID().toString()))
                 .logout(config -> config
@@ -45,12 +47,18 @@ private final DataSource dataSource;
                         .invalidateHttpSession(true)
                         .deleteCookies("JSESSIONID"));
         return http.build();
+
+//        return http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeHttpRequests(request -> request.anyRequest().authenticated())
+//                .httpBasic(Customizer.withDefaults())
+//                .build();
     }
 
     @Bean
     public AuthenticationManager authManager(HttpSecurity http) throws Exception {
         var authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        var authenticationProvider = new WebAuthenticationProvider(userDetailsService());
+        var authenticationProvider = new WebAuthenticationProvider(userDetailsService(), passwordEncoder());
         authenticationManagerBuilder.authenticationProvider(authenticationProvider);
         return authenticationManagerBuilder.build();
     }

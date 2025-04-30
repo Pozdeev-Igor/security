@@ -12,5 +12,10 @@
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Sign Out"/>
 </form>
+<div th:each="action: ${actions}">
+    <form th:action="@{${action.path}}" method="get">
+        <input type="submit" th:value="${action.role}">
+    </form>
+</div>
 </body>
 <html>

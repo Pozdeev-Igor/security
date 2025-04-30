@@ -11,8 +11,6 @@ public class AuthenticationHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException {
         var redirect = request.getContextPath();
-        var authorities = authentication.getAuthorities();
-        var pathByRole = AuthRoles.getPathByRole(authorities);
-        response.sendRedirect(pathByRole == null ? redirect : pathByRole);
+        response.sendRedirect(redirect);
     }
 }
